@@ -17,7 +17,6 @@ public class BlogPost {
     private String content;
     private LocalDateTime dateCreated;
 
-    //default != leeg, eerder zonder parameters
     public BlogPost() {
         dateCreated = LocalDateTime.now();
     }

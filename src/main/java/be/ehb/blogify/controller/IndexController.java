@@ -6,17 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Controller
 public class IndexController {
+
+    private final BlogDAO repo;
+
     @Autowired
-    private BlogDAO repo;
+    public IndexController(BlogDAO repo) {
+        this.repo = repo;
+    }
 
     @ModelAttribute("all")
     public Iterable<BlogPost> findAll(){
@@ -28,28 +30,26 @@ public class IndexController {
         return new BlogPost();
     }
 
-
-    @RequestMapping(value = {"/", "/index"})
+    @GetMapping(value = {"/", "/index"})
     public String showIndex(ModelMap map){
         return "index";
     }
 
-    @RequestMapping(value = { "/about"})
+    @GetMapping(value = { "/about"})
     public String showAbout(){
         return "about";
     }
 
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.POST)
+    @PostMapping(value = {"/", "/index"})
     public String save(@ModelAttribute("newPost") @Valid BlogPost newPost,
                        BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors())
             return "index";
-        }
         repo.save(newPost);
         return "redirect:/index";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/delete/{id}")
     public String delete( @PathVariable(value = "id") int id){
         repo.deleteById(id);
         return "redirect:/index";
