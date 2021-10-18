@@ -1,6 +1,10 @@
+.btn_hack{
+    background-color: #a83dfb !important;
+    color: white !important;
+}
 nav{
     height: 60px;
-    background-color: cornflowerblue;
+    background-color: #a83dfb;
     color: #ffffff;
     width: 100%;
     position: fixed;
@@ -29,6 +33,7 @@ nav ul li a
 nav ul li a:hover
 {
     text-decoration: none;
+    color: rgba(221, 221, 221, 0.53);
 }
 #main{
     padding-top: 70px;
