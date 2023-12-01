@@ -17,7 +17,6 @@ nav ul
 {
     list-style: none;
 }
-
 nav ul li
 {
     display: inline;
@@ -29,7 +28,6 @@ nav ul li a
     font-size: 1.5em;
     padding: 10px;
 }
-
 nav ul li a:hover
 {
     text-decoration: none;
@@ -79,7 +77,6 @@ nav ul li a:hover
     background-color: white;
     border-radius: 10px;
 }
-
 .modal-dialog .modal-body {
     color: rgba(0, 0, 0, 0.60);
     border: none;

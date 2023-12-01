@@ -12,4 +12,5 @@ public interface BlogDAO extends CrudRepository<BlogPost, Integer> {
     List<BlogPost> findAllChronological();
 
 
+
 }

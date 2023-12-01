@@ -10,19 +10,20 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+
 @Controller
 public class IndexController {
 
-    private final BlogDAO repo;
+    private final BlogDAO mBlogDAO;
 
     @Autowired
     public IndexController(BlogDAO repo) {
-        this.repo = repo;
+        this.mBlogDAO = repo;
     }
 
     @ModelAttribute("all")
     public Iterable<BlogPost> findAll(){
-        return repo.findAllChronological();
+        return mBlogDAO.findAllChronological();
     }
 
     @ModelAttribute("newPost")
@@ -43,15 +44,16 @@ public class IndexController {
     @PostMapping(value = {"/", "/index"})
     public String save(@ModelAttribute("newPost") @Valid BlogPost newPost,
                        BindingResult bindingResult){
-        if(bindingResult.hasErrors())
+        if(bindingResult.hasErrors()) {
             return "index";
-        repo.save(newPost);
+        }
+        mBlogDAO.save(newPost);
         return "redirect:/index";
     }
 
     @GetMapping(value = "/delete/{id}")
     public String delete( @PathVariable(value = "id") int id){
-        repo.deleteById(id);
+        mBlogDAO.deleteById(id);
         return "redirect:/index";
     }
 }
